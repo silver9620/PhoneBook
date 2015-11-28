@@ -1,11 +1,17 @@
 package phonebook;
 
+import GUI.Login;
 import connections.dbconn;
+import java.sql.Connection;
+import java.sql.Statement;
 /**
  *
  * @author Silver
  */
 public class Main {
+    
+    private static Connection conn = null;
+    private Statement stmt = null;
 
     /**
      * @param args the command line arguments
@@ -31,7 +37,8 @@ public class Main {
      */
     private static boolean checkDataBase()
     {
-        
+        dbconn db = new dbconn();
+        conn = db.createConn();
         return false;
     }
     
