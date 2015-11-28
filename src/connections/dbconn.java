@@ -45,7 +45,11 @@ public class dbconn {
         try{
             Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
             conn = DriverManager.getConnection(dbUrl);
-            checkDataBase();
+            
+            if(!checkDataBase())
+            {
+                
+            }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(dbconn.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -71,4 +75,27 @@ public class dbconn {
         }
         return false;
     }
+    
+     /**
+     * Creates the Login Database filled with users
+     */
+    private static void createLoginDatabase()
+    {
+        
+        
+    }
+    
+    /**
+     * Creates the main database that will
+     * hold most if not all the info
+     */
+    private static void createMainDataBase()
+    {
+        
+    }
+
+    private static void createDataBase() {
+        
+    }
+    
 }

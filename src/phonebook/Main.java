@@ -18,13 +18,9 @@ public class Main {
      * database.
      */
     public static void main(String[] args) {
-        if(!checkStart())
-        {
-            createDataBase();
-            createLoginDatabase();
-            createMainDataBase();
-        }
+        checkStart();
         Login lg = new Login();
+        lg.setVisible(true);
     }
     
     /**
@@ -34,32 +30,10 @@ public class Main {
      * @return false, Returns this by default if there 
      * is now database so it will create one
      */
-    private static boolean checkStart()
+    private static void checkStart()
     {
         db.startCheckSystem();
-        return false;
     }
     
-    /**
-     * Creates the Login Database filled with users
-     */
-    private static void createLoginDatabase()
-    {
-        
-        
-    }
-    
-    /**
-     * Creates the main database that will
-     * hold most if not all the info
-     */
-    private static void createMainDataBase()
-    {
-        
-    }
 
-    private static void createDataBase() {
-        
-    }
-    
 }
