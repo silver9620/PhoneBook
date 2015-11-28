@@ -1,7 +1,7 @@
 package phonebook;
 
-import GUI.Login;
-import connections.dbconn;
+import phonebook.GUI.Login;
+import phonebook.connections.dbconn;
 import java.sql.Connection;
 import java.sql.Statement;
 /**
