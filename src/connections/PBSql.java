@@ -17,4 +17,18 @@ public class PBSql extends dbconn{
         return false;
     }
     
+    public boolean checkUserService(String userName)
+    {
+        
+        return false;
+    }
+    
+    public boolean reisterService(String userName, String pwd)
+    {
+        
+        return false;
+    }
+    
+    
+    
 }
