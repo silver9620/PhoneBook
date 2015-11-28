@@ -21,6 +21,12 @@ public class PBSql extends dbconn{
         try {
             stmt = conn.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM USERN WHERE userNa='" + userName + "' AND passwd='" + pwd + "'");
+            if(res.next())
+            {
+                stmt.close();
+                return true;
+            }
+            stmt.close();
         } catch (SQLException ex) {
             Logger.getLogger(PBSql.class.getName()).log(Level.SEVERE, null, ex);
         }
