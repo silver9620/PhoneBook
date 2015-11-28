@@ -17,7 +17,7 @@ public class Main {
      * database.
      */
     public static void main(String[] args) {
-        checkStart();
+        Main.Start();
         Login lg = new Login();
         lg.setVisible(true);
     }
@@ -29,9 +29,10 @@ public class Main {
      * @return false, Returns this by default if there 
      * is now database so it will create one
      */
-    private static void checkStart()
+    private static void Start()
     {
         dbconn db = new dbconn();
+        
     }
     
 
