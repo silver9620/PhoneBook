@@ -10,8 +10,7 @@ import java.sql.Statement;
  */
 public class Main {
     
-    private static Connection conn = null;
-    private Statement stmt = null;
+    static dbconn db = new dbconn();
 
     /**
      * @param args the command line arguments
@@ -19,7 +18,7 @@ public class Main {
      * database.
      */
     public static void main(String[] args) {
-        if(!checkDataBase())
+        if(!checkStart())
         {
             createDataBase();
             createLoginDatabase();
@@ -35,10 +34,9 @@ public class Main {
      * @return false, Returns this by default if there 
      * is now database so it will create one
      */
-    private static boolean checkDataBase()
+    private static boolean checkStart()
     {
-        dbconn db = new dbconn();
-        conn = db.createConn();
+        db.startCheckSystem();
         return false;
     }
     
