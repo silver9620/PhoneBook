@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package connections;
 
 import java.sql.ResultSet;
@@ -35,13 +30,32 @@ public class PBSql extends dbconn{
     
     public boolean checkUserService(String userName)
     {
-        
+        try {
+            stmt = conn.createStatement();
+            ResultSet res = stmt.executeQuery("SELECT * FROM USERN WHERE userNa='" + userName + "'");
+            if(res.next())
+            {
+                stmt.close();
+                return true;
+            }
+            stmt.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         return false;
     }
     
     public boolean reisterService(String userName, String pwd)
     {
-        
+        try {
+            stmt = conn.createStatement();
+            String SQLRU = "INSERT INTO USERN (userNa, passwd) VALUES ('" + userName + "', '" + pwd +"')";
+            stmt.execute(SQLRU);
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(PBSql.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return false;
     }
     
