@@ -11,6 +11,11 @@ import java.util.logging.Logger;
  */
 public class PBSql extends dbconn{
     
+    public PBSql()
+    {
+        
+    }
+    
     public boolean loginService(String userName, String pwd)
     {
         try {
