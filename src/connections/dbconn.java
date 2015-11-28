@@ -1,6 +1,7 @@
 package connections;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,85 +18,91 @@ public class dbconn {
     
     public dbconn()
     {
-        
+        createConnection();
     }
-    
-    private static final String dbUrl = "jdbc:derby:Phonebook;create=true;user=pb;password=silverstudios";
-    
-    public final String userTable = "USERN";
-    public final String pbTable = "PHONEBOOKPB";
-    public static final String dbName = "PhoneBook";
     
     /**
-     * JDBC Connections
+     * Database URL
      */
-    private static Connection conn = null;
-    private Statement stmt = null;
-    
-    public static boolean startCheckSystem()
-    {
-        createConn();
-        
-        return false;
-    }
-    
-    
-    private static void createConn()
-    {
-        try{
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
-            conn = DriverManager.getConnection(dbUrl);
-            
-            if(!checkDataBase())
-            {
-                
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            Logger.getLogger(dbconn.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    
-    private static String databaseName;
-    private static boolean checkDataBase()
-    {
+    private final String dbURL = "jdbc:derby:Phonebook;create=true;user=pb;password=silverstudios";
+
+    private final String userTable = "USERN";
+    private final String pbTable = "PHONEBOOKPB";
+
+    //JDBC Connections
+    Connection conn = null;
+    Statement stmt = null;
+
+
+    /**
+     * Creates a connection to the database using the dbURL.
+     */
+    private void createConnection() {
         try {
-            ResultSet resultSet = conn.getMetaData().getCatalogs();
-            
-            while(resultSet.next()) {
-                databaseName = resultSet.getString(1);
-                if(databaseName.equals(dbconn.dbName))
-                {
-                    System.out.println("YAY");
-                    return true;
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+            //Create the Connection
+            conn = DriverManager.getConnection(dbURL);
+            createTables();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            ex.printStackTrace();
         }
-        return false;
-    }
-    
-     /**
-     * Creates the Login Database filled with users
-     */
-    private static void createLoginDatabase()
-    {
-        
-        
-    }
-    
-    /**
-     * Creates the main database that will
-     * hold most if not all the info
-     */
-    private static void createMainDataBase()
-    {
-        
     }
 
-    private static void createDataBase() {
-        
+    /**
+     * Checks to make sure both tables are accounted for. If not it creates
+     * them.
+     */
+    private void createTables() {
+        try {
+            stmt = conn.createStatement();
+            DatabaseMetaData dbmd = conn.getMetaData();
+            ResultSet rs = dbmd.getTables(null, null, "usern".toUpperCase(), null);
+            if (rs.next()) {
+                System.out.println("Table " + rs.getString("TABLE_NAME") + " exists!!");
+            } else {
+                System.out.println("Creating User Table....");
+                createUsern();
+            }
+
+            rs = dbmd.getTables(null, null, "phonebookpb".toUpperCase(), null);
+            if (rs.next()) {
+                System.out.println("Table " + rs.getString("TABLE_NAME") + " exists!!");
+            } else {
+                System.out.println("Creating Phonebook Table....");
+                createPhonebookpb();
+            }
+            //return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(dbconn.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void createUsern() {
+        try {
+            stmt = conn.createStatement();
+            String SQLU = "CREATE TABLE USERN (\n"
+                    + "  userNa VARCHAR(50) NOT NULL,\n"
+                    + "  passwd VARCHAR(200) NOT NULL)";
+            stmt.execute(SQLU);
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(dbconn.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void createPhonebookpb() {
+        try {
+            stmt = conn.createStatement();
+            String SQLPB = "CREATE TABLE PHONEBOOKPB (  Name VARCHAR(200) NOT NULL, Address VARCHAR(200),\n"
+                    + "State VARCHAR(50) ,\n"
+                    + "City VARCHAR(45), Zipcode INT,\n"
+                    + "PhoneNum VARCHAR(45), USERN VARCHAR(200) NOT NULL)";
+            stmt.execute(SQLPB);
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(dbconn.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        createTables();
     }
     
 }

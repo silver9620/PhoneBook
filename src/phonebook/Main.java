@@ -10,7 +10,6 @@ import java.sql.Statement;
  */
 public class Main {
     
-    static dbconn db = new dbconn();
 
     /**
      * @param args the command line arguments
@@ -32,7 +31,7 @@ public class Main {
      */
     private static void checkStart()
     {
-        db.startCheckSystem();
+        dbconn db = new dbconn();
     }
     
 
