@@ -5,6 +5,7 @@
  */
 package phonebook;
 
+import connections.dbconn;
 /**
  *
  * @author Silver
@@ -17,7 +18,12 @@ public class Main {
      * database.
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        if(!checkDataBase())
+        {
+            createDataBase();
+            createLoginDatabase();
+            createMainDataBase();
+        }
     }
     
     /**
@@ -27,7 +33,7 @@ public class Main {
      * @return false, Returns this by default if there 
      * is now database so it will create one
      */
-    private boolean checkDataBase()
+    private static boolean checkDataBase()
     {
         
         return false;
@@ -36,7 +42,7 @@ public class Main {
     /**
      * Creates the Login Database filled with users
      */
-    private void createLoginDatabase()
+    private static void createLoginDatabase()
     {
         
         
@@ -46,8 +52,12 @@ public class Main {
      * Creates the main database that will
      * hold most if not all the info
      */
-    private void createMainDataBase()
+    private static void createMainDataBase()
     {
+        
+    }
+
+    private static void createDataBase() {
         
     }
     
