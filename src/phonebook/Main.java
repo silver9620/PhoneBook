@@ -19,6 +19,7 @@ public class Main {
             createLoginDatabase();
             createMainDataBase();
         }
+        Login lg = new Login();
     }
     
     /**
