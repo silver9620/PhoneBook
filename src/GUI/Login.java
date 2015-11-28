@@ -12,6 +12,8 @@ import java.util.Arrays;
  */
 public class Login extends javax.swing.JFrame {
 
+    PBSql pbs = new PBSql();
+    
     /**
      * Creates new form Login
      */
@@ -120,7 +122,7 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //TODO: ADD LOGIN SERVICE CONNECTOR....DONE
         //TODO: ADD CONNECTION TO PHONEBOOK
-        PBSql pbs = new PBSql();
+        
         if(Arrays.toString(Passwd.getPassword()) != null)
         {
             pbs.loginService(UserName.getText(), Arrays.toString(Passwd.getPassword()));
