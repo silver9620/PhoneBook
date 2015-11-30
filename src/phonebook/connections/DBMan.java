@@ -21,4 +21,9 @@ public class DBMan {
         
     }
     
+    public boolean deleteEntry(String name, int pid)
+    {
+        return false;
+    }
+    
 }
