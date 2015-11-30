@@ -14,7 +14,7 @@ package phonebook.connections;
  *
  * @author Silver
  */
-public class DBMan {
+public class DBMan extends dbconn{
     
     public DBMan()
     {
@@ -23,6 +23,7 @@ public class DBMan {
     
     public boolean deleteEntry(String name, int pid)
     {
+        
         return false;
     }
     
