@@ -10,6 +10,10 @@
  */
 package phonebook.connections;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Silver
@@ -23,7 +27,11 @@ public class DBMan extends dbconn{
     
     public boolean deleteEntry(String name, int pid)
     {
-        
+        try {
+            stmt = conn.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMan.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return false;
     }
     
