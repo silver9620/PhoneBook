@@ -29,6 +29,7 @@ public class DBMan extends dbconn{
     {
         try {
             stmt = conn.createStatement();
+            String sql = "";
         } catch (SQLException ex) {
             Logger.getLogger(DBMan.class.getName()).log(Level.SEVERE, null, ex);
         }

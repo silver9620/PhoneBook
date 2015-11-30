@@ -1,7 +1,6 @@
 
-build/**
+build/**/
 
-dist/**
+dist/**/
 
-nbproject/**
-
+nbproject/**/
